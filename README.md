@@ -45,7 +45,6 @@ Full Example:
 local lib = loadstring(game:HttpGet('https://www.floppa.dev/AquaLib.lua'))()
 
 local window = lib.createWindow("This Is A Window", "TestWindow", true) -- lib.createWindow(title, name, draggable)
-local tab = window.createTab("This Is A Tab") -- window.createTab(name)
 tab.AddButton("This Is A Button", "TestButton", function() -- tab.AddButton(text, name, callback)
 	print("I have been clicked!")
 end)
@@ -71,4 +70,64 @@ end)
 tab.AddSlider("This Is A Slider", "TestSlider", {min = 1, max = 200, defualt = 20}, function(Value) -- tab.AddSlider(text, name, config(min, max, defualt), callback)
 	print(Value)
 end)
+```
+
+Function documentation:
+
+Lib:
+lib.createWindow, Usage:
+```lua
+local window = lib.createWindow("This Is A Window", "TestWindow", true) -- lib.createWindow(title, name, draggable)
+```
+lib.deleteWindow, Usage:
+```lua
+lib.deleteWindow("TestWindow") -- lib.deleteWindow(window name)
+```
+
+Window:
+window.createTab, Usage:
+```lua
+local tab = window.createTab("This Is A Tab") -- window.createTab(name)
+```
+window.deleteTab, Usage:
+```lua
+window.deleteTab("This Is A Tab") -- window.createTab(name)
+```
+window.Notification, Usage:
+```lua
+window.Notification("This Is A Notification!", "Nice", 10) -- window.Notification(title, description, durtion(optional))
+```
+
+Tab:
+tab.AddButton, Usage:
+```lua
+tab.AddButton("This Is A Button", "TestButton", function() -- tab.AddButton(text, name, callback)
+	print("I have been clicked!")
+end)
+```
+tab.AddLabel, Usage:
+```lua
+tab.AddLabel("This Is Text", "TestLabel")  -- tab.AddLabel(text, name)
+```
+tab.AddToggle, Usage:
+```lua
+tab.AddToggle("This Is A Toggle", "TestToggle", false, function(Value) -- tab.AddToggle(text, name, defualt value, callback)
+	print(Value) -- Value will be true or false, true means its enabled false means it isnt enabled
+end)
+```
+tab.AddDropdown, Usage:
+```lua
+tab.AddDropdown("This Is A Dropdown", "TestDropdown", {"This Is An Option 1", "This Is An Option 2", "This Is An Option 3"}, function(Value) -- tab.AddDropdown(text, name, options, callback)
+	print(Value) -- Will be one of the options
+end)
+```
+tab.AddSlider, Usage:
+```lua
+tab.AddSlider("This Is A Slider", "TestSlider", {min = 1, max = 200, defualt = 20}, function(Value) -- tab.AddSlider(text, name, config(min, max, defualt), callback)
+	print(Value) -- Will be a number between min and max
+end)
+```
+tab.RemoveInstance, Usage:
+```lua
+tab.RemoveInstance("TestButton") -- tab.RemoveInstance(Instance name)
 ```
