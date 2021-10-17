@@ -37,6 +37,10 @@ end)
 tab.AddSlider("This Is A Slider", "TestSlider", {min = 1, max = 200, defualt = 20}, function(Value) -- tab.AddSlider(text, name, config(min, max, defualt), callback)
 	print(Value)
 end)
+local input = tab.AddInput("This Is A Text Box", "Yes!", "TestInput") -- tab.AddInput(placeholder text, text, name)
+print(input.GetInput())
+wait(5)
+input.ClearInput()
 ```
 And your done! You can repeat this process to add more tabs
 
@@ -70,6 +74,10 @@ end)
 tab.AddSlider("This Is A Slider", "TestSlider", {min = 1, max = 200, defualt = 20}, function(Value) -- tab.AddSlider(text, name, config(min, max, defualt), callback)
 	print(Value)
 end)
+local input = tab.AddInput("This Is A Text Box", "Yes!", "TestInput") -- tab.AddInput(placeholder text, text, name)
+print(input.GetInput())
+wait(5)
+input.ClearInput()
 ```
 
 Function documentation:
@@ -127,7 +135,21 @@ tab.AddSlider("This Is A Slider", "TestSlider", {min = 1, max = 200, defualt = 2
 	print(Value) -- Will be a number between min and max
 end)
 ```
+tab.AddInput, Usage:
+```lua
+local input = tab.AddInput("This Is A Text Box", "Yes!", "TestInput") -- tab.AddInput(placeholder text, text, name)
+```
 tab.RemoveInstance, Usage:
 ```lua
 tab.RemoveInstance("TestButton") -- tab.RemoveInstance(Instance name)
+```
+Input:
+input.GetInput, Usage:
+```lua
+local value = input.GetInput() -- input.GetInput()
+print(value)
+```
+input.ClearInput, Usage:
+```lua
+input.ClearInput() -- input.ClearInput
 ```
