@@ -49,6 +49,7 @@ Full Example:
 local lib = loadstring(game:HttpGet('https://www.floppa.dev/AquaLib.lua'))()
 
 local window = lib.createWindow("This Is A Window", "TestWindow", true) -- lib.createWindow(title, name, draggable)
+local tab = window.createTab("This Is A Tab") -- window.createTab(name)
 tab.AddButton("This Is A Button", "TestButton", function() -- tab.AddButton(text, name, callback)
 	print("I have been clicked!")
 end)
