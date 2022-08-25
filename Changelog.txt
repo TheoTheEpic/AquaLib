@@ -1,2 +1,2 @@
-- Added "welcome" message
-- Added better fade in and out animations
+- Added changelog & version check
+- Bug fixes
