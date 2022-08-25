@@ -300,9 +300,10 @@ lib.createWindow = function(title, name, draggable)
 	Title_2.Size = UDim2.new(0.987628639, -20, 0.133877605, 0)
 	Title_2.ZIndex = 3
 	Title_2.Font = Enum.Font.GothamSemibold
-	Title_2.Text = name
+	Title_2.Text = title
 	Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Title_2.TextSize = 22.000
+	Title_2.TextSize = 15.000
+	Title_2.TextScaled = true
 	Title_2.TextXAlignment = Enum.TextXAlignment.Left
 
 	local Display = Instance.new("Frame")
