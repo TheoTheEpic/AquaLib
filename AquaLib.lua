@@ -1,4 +1,4 @@
-local ver = "V1.1"
+local ver = "BETA 1.0"
 
 local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
@@ -43,6 +43,43 @@ lib.createWindow = function(title, name, draggable)
 	local tabbuttonholder
 
 	local WindowLib = {}
+	
+	WindowLib.ImageFadeOut = function(v, duration)
+		if not duration then duration = .3 end
+		local tweenservice = game:GetService("TweenService")
+		local info = TweenInfo.new(duration, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
+		tweenservice:Create(v, info, {ImageTransparency = 1}):Play()
+	end
+	WindowLib.ImageFadeIn = function(v, duration)
+		if not duration then duration = .3 end
+		local tweenservice = game:GetService("TweenService")
+		local info = TweenInfo.new(duration, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
+		tweenservice:Create(v, info, {ImageTransparency = 0}):Play()
+	end
+	WindowLib.BackgroundFadeOut = function(v, duration)
+		if not duration then duration = .3 end
+		local tweenservice = game:GetService("TweenService")
+		local info = TweenInfo.new(duration, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
+		tweenservice:Create(v, info, {BackgroundTransparency = 1}):Play()
+	end
+	WindowLib.BackgroundFadeIn = function(v, duration)
+		if not duration then duration = .3 end
+		local tweenservice = game:GetService("TweenService")
+		local info = TweenInfo.new(duration, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
+		tweenservice:Create(v, info, {BackgroundTransparency = 0}):Play()
+	end
+	WindowLib.TextFadeOut = function(v, duration)
+		if not duration then duration = .3 end
+		local tweenservice = game:GetService("TweenService")
+		local info = TweenInfo.new(duration, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
+		tweenservice:Create(v, info, {TextTransparency = 1}):Play()
+	end
+	WindowLib.TextFadeIn = function(v, duration)
+		if not duration then duration = .3 end
+		local tweenservice = game:GetService("TweenService")
+		local info = TweenInfo.new(duration, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
+		tweenservice:Create(v, info, {TextTransparency = 0}):Play()
+	end
 
 	window = Instance.new("ScreenGui")
 	window.Name = name
@@ -64,83 +101,76 @@ lib.createWindow = function(title, name, draggable)
 	NotificationList.Parent = window
 	NotificationList.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	NotificationList.BackgroundTransparency = 1.000
-	NotificationList.Position = UDim2.new(0.759147465, 0, 0.295608371, 0)
+	NotificationList.BorderSizePixel = 0
+	NotificationList.Position = UDim2.new(0.754748642, 0, 0.00597784482, 0)
 	NotificationList.Size = UDim2.new(0.240573183, 0, 0.704264104, 0)
-
+	
+	local NotificationlistLayout = Instance.new("UIListLayout")
+	NotificationlistLayout.Parent = NotificationList
+	NotificationlistLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
+	NotificationlistLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	NotificationlistLayout.Padding = UDim.new(0, 2)
+	
 	local Notification = Instance.new("Frame")
+
 	Notification.Name = "Notification"
 	Notification.Parent = NotificationList
-	Notification.BackgroundColor3 = Color3.fromRGB(29, 29, 29)
-	Notification.BackgroundTransparency = 1.000
-	Notification.Position = UDim2.new(0.264621258, 0, 0.8671875, 0)
-	Notification.Size = UDim2.new(0.735378683, 0, 0.1328125, 0)
+	Notification.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
+	Notification.BorderSizePixel = 0
+	Notification.Position = UDim2.new(0.821048677, 0, 0.0226460081, 0)
+	Notification.Size = UDim2.new(0, 225, 0, 72)
 	Notification.Visible = false
-
-
+	Notification.BackgroundTransparency = 1
+	
 	local NotifCorner = Instance.new("UICorner")
-	NotifCorner.CornerRadius = UDim.new(0, 4)
+	NotifCorner.CornerRadius = UDim.new(0, 5)
 	NotifCorner.Parent = Notification
-
-	local Top = Instance.new("Frame")
-	Top.Name = "Top"
-	Top.Parent = Notification
-	Top.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
-	Top.BackgroundTransparency = 1.000
-	Top.Size = UDim2.new(0.999999881, 0, 0.230000004, 0)
-
-	local TopCorner = Instance.new("UICorner")
-	TopCorner.CornerRadius = UDim.new(0, 4)
-	TopCorner.Parent = Top
-
-	local Title = Instance.new("TextLabel")
-	Title.Name = "Title"
-	Title.Parent = Top
-	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Title.BackgroundTransparency = 1.000
-	Title.Position = UDim2.new(0.0278746728, 0, 0, 0)
-	Title.Size = UDim2.new(0.921232879, 0, 1, 0)
-	Title.Font = Enum.Font.GothamSemibold
-	Title.Text = "Title"
-	Title.TextColor3 = Color3.fromRGB(61, 133, 222)
-	Title.TextSize = 14.000
-	Title.TextTransparency = 1.000
-	Title.TextXAlignment = Enum.TextXAlignment.Left
-
+	
 	local Counter = Instance.new("TextLabel")
 	Counter.Name = "Counter"
-	Counter.Parent = Top
+	Counter.Parent = Notification
 	Counter.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Counter.BackgroundTransparency = 1.000
-	Counter.Position = UDim2.new(0.914860964, 0, 0, 0)
-	Counter.Size = UDim2.new(0.0821917802, 0, 1, 0)
-	Counter.Font = Enum.Font.GothamSemibold
-	Counter.Text = "(5)"
-	Counter.TextColor3 = Color3.fromRGB(61, 133, 222)
+	Counter.BorderSizePixel = 0
+	Counter.Position = UDim2.new(0.613333285, 0, 0, 0)
+	Counter.Size = UDim2.new(0, 138, 0, 23)
+	Counter.Font = Enum.Font.GothamBold
+	Counter.Text = "(10)"
+	Counter.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Counter.TextSize = 14.000
-	Counter.TextTransparency = 1.000
-	Counter.TextXAlignment = Enum.TextXAlignment.Left
-
+	Counter.TextTransparency = 1
+	
+	local Title = Instance.new("TextLabel")
+	Title.Name = "Title"
+	Title.Parent = Notification
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.BackgroundTransparency = 1.000
+	Title.BorderSizePixel = 0
+	Title.Position = UDim2.new(0.0355554968, 0, 0, 0)
+	Title.Size = UDim2.new(0, 138, 0, 23)
+	Title.Font = Enum.Font.GothamBold
+	Title.Text = "Title"
+	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title.TextSize = 14.000
+	Title.TextXAlignment = Enum.TextXAlignment.Left
+	Title.TextTransparency = 1
+	
 	local Text = Instance.new("TextLabel")
 	Text.Name = "Text"
 	Text.Parent = Notification
 	Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Text.BackgroundTransparency = 1.000
-	Text.Position = UDim2.new(0.0278745648, 0, 0.304347545, 0)
-	Text.Size = UDim2.new(0.931506753, 0, 0.639999986, 0)
-	Text.Font = Enum.Font.GothamSemibold
+	Text.BorderSizePixel = 0
+	Text.Position = UDim2.new(0.0355555564, 0, 0.319444448, 0)
+	Text.Size = UDim2.new(0, 210, 0, 43)
+	Text.Font = Enum.Font.Gotham
 	Text.Text = "Text"
-	Text.TextColor3 = Color3.fromRGB(190, 190, 190)
+	Text.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Text.TextSize = 14.000
-	Text.TextTransparency = 1.000
 	Text.TextWrapped = true
 	Text.TextXAlignment = Enum.TextXAlignment.Left
 	Text.TextYAlignment = Enum.TextYAlignment.Top
-
-	local List = Instance.new("UIListLayout")
-	List.Parent = NotificationList
-	List.HorizontalAlignment = Enum.HorizontalAlignment.Right
-	List.SortOrder = Enum.SortOrder.LayoutOrder
-	List.VerticalAlignment = Enum.VerticalAlignment.Bottom
+	Text.TextTransparency = 1
 
 	local ContainerFrame = Instance.new("Frame")
 	ContainerFrame.Name = "ContainerFrame"
@@ -152,6 +182,47 @@ lib.createWindow = function(title, name, draggable)
 	ContainerFrame.Position = UDim2.new(0.499127448, 0, 0.499993384, 0)
 	ContainerFrame.Size = UDim2.new(0, 525, 0, 329)
 	ContainerFrame.ZIndex = 2
+	
+	local Intro = Instance.new("Frame")
+
+	Intro.Name = "Intro"
+	Intro.Parent = ContainerFrame
+	Intro.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Intro.BackgroundTransparency = 1.000
+	Intro.BorderSizePixel = 0
+	Intro.Position = UDim2.new(-0.796780586, 0, -0.775059104, 0)
+	Intro.Size = UDim2.new(0, 1364, 0, 838)
+	Intro.Visible = true
+
+	local LibName = Instance.new("TextLabel")
+
+	LibName.Name = "Name"
+	LibName.Parent = Intro
+	LibName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	LibName.BackgroundTransparency = 1.000
+	LibName.BorderSizePixel = 0
+	LibName.Position = UDim2.new(0.426686227, 0, 0.48152563, 0)
+	LibName.Size = UDim2.new(0, 200, 0, 50)
+	LibName.Font = Enum.Font.GothamBold
+	LibName.Text = "Aqua Lib"
+	LibName.TextColor3 = Color3.fromRGB(255, 255, 255)
+	LibName.TextSize = 25.000
+	LibName.TextTransparency = 1
+
+	local WelcomeTo = Instance.new("TextLabel")
+
+	WelcomeTo.Name = "WelcomeTo"
+	WelcomeTo.Parent = Intro
+	WelcomeTo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	WelcomeTo.BackgroundTransparency = 1.000
+	WelcomeTo.BorderSizePixel = 0
+	WelcomeTo.Position = UDim2.new(0.426686227, 0, 0.45887965, 0)
+	WelcomeTo.Size = UDim2.new(0, 200, 0, 50)
+	WelcomeTo.Font = Enum.Font.GothamBold
+	WelcomeTo.Text = "Welcome to"
+	WelcomeTo.TextColor3 = Color3.fromRGB(255, 255, 255)
+	WelcomeTo.TextSize = 15.000
+	WelcomeTo.TextTransparency = 1
 
 	local MainFrame = Instance.new("Frame")
 	MainFrame.Name = "MainFrame"
@@ -162,6 +233,7 @@ lib.createWindow = function(title, name, draggable)
 	MainFrame.Position = UDim2.new(0.499127448, 0, 0.499993384, 0)
 	MainFrame.Size = UDim2.new(0, 525, 0, 329)
 	MainFrame.ZIndex = 2
+	MainFrame.BackgroundTransparency = 1
 
 	mainframe = MainFrame
 
@@ -240,7 +312,7 @@ lib.createWindow = function(title, name, draggable)
 	Watermark.ZIndex = 1000000000
 	Watermark.Font = Enum.Font.Gotham
 	Watermark.TextWrapped = true
-	
+
 	local CurrentTab = Instance.new("TextLabel")
 	CurrentTab.Name = "CurrentTab"
 	CurrentTab.Parent = MainFrame
@@ -255,8 +327,64 @@ lib.createWindow = function(title, name, draggable)
 	CurrentTab.TextXAlignment = Enum.TextXAlignment.Left
 
 	Close.MouseButton1Down:Connect(function()
+		local decendants = MainFrame:GetDescendants()
+		for _,decendant in pairs(decendants) do
+			if decendant:IsA("TextButton") or decendant:IsA("TextBox") or decendant:IsA("TextLabel") then
+				WindowLib.BackgroundFadeOut(decendant, 1.5)
+				WindowLib.TextFadeOut(decendant, 1.5)
+			elseif decendant:IsA("Frame") then
+				WindowLib.BackgroundFadeOut(decendant, 1.5)
+			elseif decendant:IsA("ImageLabel") or decendant:IsA("ImageFrame") or decendant:IsA("ImageButton") then
+				WindowLib.ImageFadeOut(decendant, 1.5)
+			end
+		end
+		WindowLib.BackgroundFadeOut(mainframe, 1.5)
+		wait(1.6)
 		window:Destroy()
 	end)
+	
+	local decendants = MainFrame:GetDescendants()
+	for _,decendant in pairs(decendants) do
+		if decendant:IsA("TextButton") or decendant:IsA("TextBox") or decendant:IsA("TextLabel") then
+			WindowLib.BackgroundFadeOut(decendant, .01)
+			WindowLib.TextFadeOut(decendant, .01)
+		elseif decendant:IsA("Frame") then
+			WindowLib.BackgroundFadeOut(decendant, .01)
+		elseif decendant:IsA("ImageLabel") or decendant:IsA("ImageFrame") or decendant:IsA("ImageButton") then
+			WindowLib.ImageFadeOut(decendant, .01)
+		end
+	end
+	
+	wait(5)
+	WindowLib.TextFadeIn(WelcomeTo, .5)
+	wait(0.5)
+	WindowLib.TextFadeIn(LibName, .5)
+	wait(1)
+	WindowLib.TextFadeOut(WelcomeTo, .5)
+	wait(1)
+	WindowLib.TextFadeOut(LibName, 1)
+	wait(0.5)
+	
+	local decendants = MainFrame:GetDescendants()
+	for _,decendant in pairs(decendants) do
+		if decendant:IsA("TextButton") or decendant:IsA("TextBox") or decendant:IsA("TextLabel") then
+			if decendant.BackgroundColor3 == Color3.fromRGB(255, 255, 255) or decendant.BackgroundColor3 == Color3.fromRGB(163, 162, 165) then
+				WindowLib.TextFadeIn(decendant, 1.5)
+			else
+				WindowLib.BackgroundFadeIn(decendant, 1.5)
+				WindowLib.TextFadeIn(decendant, 1.5)
+			end
+		elseif decendant:IsA("Frame") then
+			if decendant.BackgroundColor3 == Color3.fromRGB(255, 255, 255) or decendant.BackgroundColor3 == Color3.fromRGB(163, 162, 165) then
+			else
+				WindowLib.BackgroundFadeIn(decendant, 1.5)
+			end
+		elseif decendant:IsA("ImageLabel") or decendant:IsA("ImageFrame") or decendant:IsA("ImageButton") then
+			WindowLib.ImageFadeIn(decendant, 1.5)
+		end
+	end
+	WindowLib.BackgroundFadeIn(MainFrame, 1.5)
+	
 
 	WindowLib.createTab = function(name)
 		local TabLib = {}
@@ -473,7 +601,7 @@ lib.createWindow = function(title, name, draggable)
 
 			dropdownbuttonround.Parent = dropdownbutton
 			dropdownbuttonround.CornerRadius = UDim.new(0, 3)
-			
+
 			dropdownframe.Name = "Options"
 			dropdownframe.Position = UDim2.new(0,0,0,30)
 			dropdownframe.BackgroundTransparency = 1
@@ -492,7 +620,7 @@ lib.createWindow = function(title, name, draggable)
 			dropdownexpander.Size = UDim2.new(0,16,0,16)
 			dropdownexpander.Position = UDim2.new(0.997, -18, 0.08, 2)
 			dropdownexpander.ZIndex = 5
-			
+
 			for optionlist,option in next, dropdownarray do
 				local button = TabLib.AddButton(option, "DropdownOption", function()
 					selected = option
@@ -506,7 +634,7 @@ lib.createWindow = function(title, name, draggable)
 					dropdownbutton.Text = text..": "..option
 				end
 			end
-			
+
 			local spacer = Instance.new("TextLabel")
 			spacer.Name = "Spacer"
 			spacer.Text = ""
@@ -745,63 +873,40 @@ lib.createWindow = function(title, name, draggable)
 		end)	
 	end
 
-	WindowLib.BackgroundFadeOut = function(v)
-		local tweenservice = game:GetService("TweenService")
-		local info = TweenInfo.new(.3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
-		tweenservice:Create(v, info, {BackgroundTransparency = 1}):Play()
-	end
-	WindowLib.BackgroundFadeIn = function(v)
-		local tweenservice = game:GetService("TweenService")
-		local info = TweenInfo.new(.3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
-		tweenservice:Create(v, info, {BackgroundTransparency = 0}):Play()
-	end
-	WindowLib.TextFadeOut = function(v)
-		local tweenservice = game:GetService("TweenService")
-		local info = TweenInfo.new(.3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
-		tweenservice:Create(v, info, {TextTransparency = 1}):Play()
-	end
-	WindowLib.TextFadeIn = function(v)
-		local tweenservice = game:GetService("TweenService")
-		local info = TweenInfo.new(.3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
-		tweenservice:Create(v, info, {TextTransparency = 0}):Play()
-	end
 
 	WindowLib.Notification = function(title, text, duration)
 		local card = window.NotificationList.Notification:Clone()
 		card.Text.Text = text
-		card.Top.Title.Text = title
+		card.Title.Text = title
 		card.Parent = window.NotificationList
 		card.Visible = true
-		WindowLib.HighlightText(card.Text)
 		WindowLib.BackgroundFadeIn(card)
-		WindowLib.BackgroundFadeIn(card.Top)
+		WindowLib.HighlightText(card.Text)
 		WindowLib.TextFadeIn(card.Text)
-		WindowLib.TextFadeIn(card.Top.Title)
-		WindowLib.TextFadeIn(card.Top.Counter)
+		WindowLib.TextFadeIn(card.Title)
+		WindowLib.TextFadeIn(card.Counter)
 		if duration == nil then
-			card.Top.Counter.Text = "(5)"
+			card.Counter.Text = "(5)"
 			for i = 5,0,-1 do
-				card.Top.Counter.Text = "(" .. i .. ")"
+				card.Counter.Text = "(" .. i .. ")"
 				wait(1)
 			end
 			WindowLib.BackgroundFadeOut(card)
-			WindowLib.BackgroundFadeOut(card.Top)
 			WindowLib.TextFadeOut(card.Text)
-			WindowLib.TextFadeOut(card.Top.Title)
-			WindowLib.TextFadeOut(card.Top.Counter)
+			WindowLib.TextFadeOut(card.Title)
+			WindowLib.TextFadeOut(card.Counter)
 			wait(.4)
 			card:Destroy()
 		else
-			card.Top.Counter.Text = "(" .. duration .. ")"
+			card.Counter.Text = "(" .. duration .. ")"
 			for i = duration,0,-1 do
-				card.Top.Counter.Text = "(" .. i .. ")"
+				card.Counter.Text = "(" .. i .. ")"
 				wait(1)
 			end
 			WindowLib.BackgroundFadeOut(card)
-			WindowLib.BackgroundFadeOut(card.Top)
 			WindowLib.TextFadeOut(card.Text)
-			WindowLib.TextFadeOut(card.Top.Title)
-			WindowLib.TextFadeOut(card.Top.Counter)
+			WindowLib.TextFadeOut(card.Title)
+			WindowLib.TextFadeOut(card.Counter)
 			wait(.4)
 			card:Destroy()
 		end
