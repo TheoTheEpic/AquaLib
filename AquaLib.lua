@@ -300,7 +300,7 @@ lib.createWindow = function(title, name, draggable)
 	Title_2.Size = UDim2.new(0.987628639, -20, 0.133877605, 0)
 	Title_2.ZIndex = 3
 	Title_2.Font = Enum.Font.GothamSemibold
-	Title_2.Text = "Test"
+	Title_2.Text = name
 	Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Title_2.TextSize = 22.000
 	Title_2.TextXAlignment = Enum.TextXAlignment.Left
@@ -853,12 +853,12 @@ lib.createWindow = function(title, name, draggable)
 			if v:IsA("TextButton")then
 				v.MouseEnter:Connect(function()
 					if tab ~= v.Name then
-						tweenservice:Create(v, info, hover):Play()
+						tweenservice:Create(v, info2, hover):Play()
 					end
 				end)
 				v.MouseLeave:Connect(function()
 					if tab ~= v.Name then
-						tweenservice:Create(v, info, unselected):Play()
+						tweenservice:Create(v, info2, unselected):Play()
 					end
 				end)
 				if true then
@@ -874,7 +874,7 @@ lib.createWindow = function(title, name, draggable)
 							tab = v.Name
 							CurrentTab.Text = v.Name
 							tabholder[tab].Visible = true
-							tweenservice:Create(tabbuttonholder[tab], info, selected):Play()
+							tweenservice:Create(tabbuttonholder[tab], info2, selected):Play()
 							tabholder[tab]:TweenSize(UDim2.new(0, 421,0, 300), "Out", "Quint", .4, false)
 							wait(.3)
 							deb = false
@@ -882,9 +882,9 @@ lib.createWindow = function(title, name, draggable)
 					end)
 				else
 					v.MouseButton1Down:Connect(function()
-						tweenservice:Create(v, info, selected):Play()
+						tweenservice:Create(v, info2, selected):Play()
 						wait(.5)
-						tweenservice:Create(v, info, unselected):Play()
+						tweenservice:Create(v, info2, unselected):Play()
 					end)
 				end
 			end
