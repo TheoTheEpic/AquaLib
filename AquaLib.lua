@@ -1,4 +1,5 @@
-local ver = "BETA 1.0"
+local ver = "BETA 1.1"
+local changelog = game:HttpGet("https://raw.githubusercontent.com/TheoTheEpic/AquaLib/main/Changelog.txt")
 
 local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
@@ -43,6 +44,23 @@ lib.createWindow = function(title, name, draggable)
 	local tabbuttonholder
 
 	local WindowLib = {}
+	
+	WindowLib.HighlightText = function(v)
+		local tweenservice = game:GetService("TweenService")
+		local info = TweenInfo.new(.3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
+		local unselected = {
+			TextColor3 = Color3.fromRGB(190, 190, 190)
+		}
+		local hover = {
+			TextColor3 = Color3.fromRGB(235, 235, 235)
+		}
+		v.MouseEnter:Connect(function()
+			tweenservice:Create(v, info, hover):Play()
+		end)
+		v.MouseLeave:Connect(function()
+			tweenservice:Create(v, info, unselected):Play()
+		end)	
+	end
 	
 	WindowLib.ImageFadeOut = function(v, duration)
 		if not duration then duration = .3 end
@@ -306,12 +324,14 @@ lib.createWindow = function(title, name, draggable)
 	Watermark.Text = "Aqua UI Library " .. tostring(ver)
 	Watermark.BackgroundTransparency = 1
 	Watermark.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Watermark.Position = UDim2.new(0, 0, 0.932, 0)
+	Watermark.Position = UDim2.new(0.01, 0, 0.932, 0)
 	Watermark.Size = UDim2.new(0.2, 0, 0.008, 20)
-	Watermark.TextSize = 9
+	Watermark.TextSize = 10
 	Watermark.ZIndex = 1000000000
 	Watermark.Font = Enum.Font.Gotham
 	Watermark.TextWrapped = true
+	Watermark.TextXAlignment = Enum.TextXAlignment.Center
+	Watermark.TextYAlignment = Enum.TextYAlignment.Center
 
 	local CurrentTab = Instance.new("TextLabel")
 	CurrentTab.Name = "CurrentTab"
@@ -321,7 +341,7 @@ lib.createWindow = function(title, name, draggable)
 	CurrentTab.Size = UDim2.new(0.750782788, -20, 0.0882848948, 0)
 	CurrentTab.ZIndex = 3
 	CurrentTab.Font = Enum.Font.GothamSemibold
-	CurrentTab.Text = "unloaded"
+	CurrentTab.Text = "Loading..."
 	CurrentTab.TextColor3 = Color3.fromRGB(255, 255, 255)
 	CurrentTab.TextSize = 14.000
 	CurrentTab.TextXAlignment = Enum.TextXAlignment.Left
@@ -355,16 +375,65 @@ lib.createWindow = function(title, name, draggable)
 		end
 	end
 	
-	wait(5)
+			WindowLib.Notification = function(title, text, duration)
+		local card = window.NotificationList.Notification:Clone()
+		card.Text.Text = text
+		card.Title.Text = title
+		card.Parent = window.NotificationList
+		card.Visible = true
+		WindowLib.BackgroundFadeIn(card)
+		WindowLib.HighlightText(card.Text)
+		WindowLib.TextFadeIn(card.Text)
+		WindowLib.TextFadeIn(card.Title)
+		WindowLib.TextFadeIn(card.Counter)
+		if duration == nil then
+			card.Counter.Text = "(5)"
+			for i = 5,0,-1 do
+				card.Counter.Text = "(" .. i .. ")"
+				wait(1)
+			end
+			WindowLib.BackgroundFadeOut(card)
+			WindowLib.TextFadeOut(card.Text)
+			WindowLib.TextFadeOut(card.Title)
+			WindowLib.TextFadeOut(card.Counter)
+			wait(.4)
+			card:Destroy()
+		else
+			card.Counter.Text = "(" .. duration .. ")"
+			for i = duration,0,-1 do
+				card.Counter.Text = "(" .. i .. ")"
+				wait(1)
+			end
+			WindowLib.BackgroundFadeOut(card)
+			WindowLib.TextFadeOut(card.Text)
+			WindowLib.TextFadeOut(card.Title)
+			WindowLib.TextFadeOut(card.Counter)
+			wait(.4)
+			card:Destroy()
+		end
+	end
+	
+	
 	WindowLib.TextFadeIn(WelcomeTo, .5)
 	wait(0.5)
 	WindowLib.TextFadeIn(LibName, .5)
 	wait(1)
 	WindowLib.TextFadeOut(WelcomeTo, .5)
+    if isfile('AquaLibVer.txt') then
+	 if readfile('AquaLibVer.txt') == ver then
+	 else
+	   print(changelog)
+	   writefile('AquaLibVer.txt', ver)
+	   WindowLib.Notification("New Version (" .. ver .. ")", changelog, 5)
+     end
+    else
+      writefile('AquaLibVer.txt', ver)
+    end
 	wait(1)
 	WindowLib.TextFadeOut(LibName, 1)
 	wait(0.5)
-	
+    
+	WindowLib.BackgroundFadeIn(MainFrame, 1.5)
 	local decendants = MainFrame:GetDescendants()
 	for _,decendant in pairs(decendants) do
 		if decendant:IsA("TextButton") or decendant:IsA("TextBox") or decendant:IsA("TextLabel") then
@@ -383,7 +452,6 @@ lib.createWindow = function(title, name, draggable)
 			WindowLib.ImageFadeIn(decendant, 1.5)
 		end
 	end
-	WindowLib.BackgroundFadeIn(MainFrame, 1.5)
 	
 
 	WindowLib.createTab = function(name)
@@ -766,7 +834,7 @@ lib.createWindow = function(title, name, draggable)
 
 		wait(0.1)
 		local tweenservice = game:GetService("TweenService")
-		local info = TweenInfo.new(.8, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
+		local info2 = TweenInfo.new(.8, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
 		local tab = defualt_tab
 		local unselected = {
 			TextColor3 = Color3.fromRGB(190, 190, 190)
@@ -777,7 +845,9 @@ lib.createWindow = function(title, name, draggable)
 		local hover = {
 			TextColor3 = Color3.fromRGB(235, 235, 235)
 		}
-		tweenservice:Create(tabbuttonholder[tab], info, selected):Play()
+		print(tab)
+		print(defualt_tab)
+		tweenservice:Create(tabbuttonholder[tab], info2, selected):Play()
 		local deb = false
 		for i,v in pairs(tabbuttonholder:GetChildren())do
 			if v:IsA("TextButton")then
@@ -856,69 +926,14 @@ lib.createWindow = function(title, name, draggable)
 		end)
 	end
 
-	WindowLib.HighlightText = function(v)
-		local tweenservice = game:GetService("TweenService")
-		local info = TweenInfo.new(.3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
-		local unselected = {
-			TextColor3 = Color3.fromRGB(190, 190, 190)
-		}
-		local hover = {
-			TextColor3 = Color3.fromRGB(235, 235, 235)
-		}
-		v.MouseEnter:Connect(function()
-			tweenservice:Create(v, info, hover):Play()
-		end)
-		v.MouseLeave:Connect(function()
-			tweenservice:Create(v, info, unselected):Play()
-		end)	
-	end
 
-
-	WindowLib.Notification = function(title, text, duration)
-		local card = window.NotificationList.Notification:Clone()
-		card.Text.Text = text
-		card.Title.Text = title
-		card.Parent = window.NotificationList
-		card.Visible = true
-		WindowLib.BackgroundFadeIn(card)
-		WindowLib.HighlightText(card.Text)
-		WindowLib.TextFadeIn(card.Text)
-		WindowLib.TextFadeIn(card.Title)
-		WindowLib.TextFadeIn(card.Counter)
-		if duration == nil then
-			card.Counter.Text = "(5)"
-			for i = 5,0,-1 do
-				card.Counter.Text = "(" .. i .. ")"
-				wait(1)
-			end
-			WindowLib.BackgroundFadeOut(card)
-			WindowLib.TextFadeOut(card.Text)
-			WindowLib.TextFadeOut(card.Title)
-			WindowLib.TextFadeOut(card.Counter)
-			wait(.4)
-			card:Destroy()
-		else
-			card.Counter.Text = "(" .. duration .. ")"
-			for i = duration,0,-1 do
-				card.Counter.Text = "(" .. i .. ")"
-				wait(1)
-			end
-			WindowLib.BackgroundFadeOut(card)
-			WindowLib.TextFadeOut(card.Text)
-			WindowLib.TextFadeOut(card.Title)
-			WindowLib.TextFadeOut(card.Counter)
-			wait(.4)
-			card:Destroy()
-		end
-	end
 
 	if not draggable then 
 		draggable = false
 	elseif draggable == true then
 		coroutine.wrap(DragScript)()
 	end
-
-
+    
 	return WindowLib
 end
 
