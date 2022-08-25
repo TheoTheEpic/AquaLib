@@ -1,4 +1,4 @@
-local ver = "BETA 1.1"
+local ver = "BETA 1.1.1"
 local changelog = game:HttpGet("https://raw.githubusercontent.com/TheoTheEpic/AquaLib/main/Changelog.txt")
 
 local player = game.Players.LocalPlayer
