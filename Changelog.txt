@@ -1,2 +1,2 @@
-- Added changelog & version check
-- Bug fixes
+- Massive bug fixes
+- Fixed title
