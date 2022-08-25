@@ -868,7 +868,7 @@ lib.createWindow = function(title, name, draggable)
 							deb = true
 							if tab ~= nil then
 								tabholder[tab]:TweenSize(UDim2.new(0, 0, 0, 300), "Out", "Quint", .4, false)
-								tweenservice:Create(tabbuttonholder[tab], info, unselected):Play()
+								tweenservice:Create(tabbuttonholder[tab], info2, unselected):Play()
 								wait(.4)
 								tabholder[tab].Visible = false
 							end
