@@ -1,6 +1,6 @@
 Step 1: Import the library
 ```lua
-local lib = loadstring(game:HttpGet('https://www.floppa.dev/AquaLib.lua'))()
+local lib = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheoTheEpic/AquaLib/main/AquaLib.lua'))()
 ```
 Step 2: Create a window
 ```lua
