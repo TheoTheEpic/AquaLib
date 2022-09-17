@@ -46,7 +46,7 @@ And your done! You can repeat this process to add more tabs
 
 Full Example:
 ```lua
-local lib = loadstring(game:HttpGet('https://www.floppa.dev/AquaLib.lua'))()
+local lib = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheoTheEpic/AquaLib/main/AquaLib.lua'))()
 
 local window = lib.createWindow("This Is A Window", "TestWindow", true) -- lib.createWindow(title, name, draggable)
 local tab = window.createTab("This Is A Tab") -- window.createTab(name)
