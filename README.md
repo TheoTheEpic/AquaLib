@@ -102,14 +102,14 @@ tab.createText("Test Text")  -- tab.createText(text)
 ```
 tab.createToggle, Usage:
 ```lua
-tab.createToggle("This Is A Toggle", "TestToggle", false, function(Value) -- tab.createToggle(text, name, defualt value, callback)
-	print(Value) -- Value will be true or false, true means its enabled false means it isnt enabled
+tab.createToggle("Test Toggle", false, function(value) -- tab.createToggle(text, defualt value, callback)
+	print(value)
 end)
 ```
 tab.createDropdown, Usage:
 ```lua
-tab.createDropdown("This Is A Dropdown", "TestDropdown", {"This Is An Option 1", "This Is An Option 2", "This Is An Option 3"}, function(Value) -- tab.createDropdown(text, name, options, callback)
-	print(Value) -- Will be one of the options
+tab.createDropdown("Test Dropdown", {"Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8", "Option 9", "Option 10"}, "Option 7", function(value) -- tab.createDropdown(name, options, callback)
+	print(value)
 end)
 ```
 tab.createSlider, Usage:
