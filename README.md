@@ -4,43 +4,34 @@ local lib = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheoTheEp
 ```
 Step 2: Create a window
 ```lua
-local window = lib.createWindow("This Is A Window", "TestWindow", true) -- lib.createWindow(title, name, draggable)
+local window = lib.createWindow("Aqua", "Aqua Library", true) 
 ```
 Step 3: Create a tab
 ```lua
-local tab = window.createTab("This Is A Tab") -- window.createTab(name)
+local tab1 = window.createTab("Test Tab")
 ```
 Step 4: Add components 
 ```lua
-tab.AddButton("This Is A Button", "TestButton", function() -- tab.AddButton(text, name, callback)
-	print("I have been clicked!")
+tab1.createButton("Test Button", function()
+	print("Button Pressed!")
 end)
-tab.AddButton("Delete This Button", "TestButton2", function() -- tab.AddButton(text, name, callback)
-	tab.RemoveInstance("TestButton2") -- tab.RemoveInstance(instance name)
+tab1.createButton("Create Notification", function() 
+	window.notification("Test Notification", "Hello World")
 end)
-tab.AddButton("Delete This Tab", "TestButton3", function() -- tab.AddButton(text, name, callback)
-	window.deleteTab("This Is A Tab") -- window.deleteTab(tab name)
+tab1.createToggle("Test Toggle", false, function(value)
+	print(value)
 end)
-tab.AddButton("Delete This Window", "TestButton4", function() -- tab.AddButton(text, name, callback)
-	lib.deleteWindow("TestWindow") -- lib.deleteWindow(window name)
+tab1.createText("Test Text")
+tab1.createDropdown("Test Dropdown", {"Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8", "Option 9", "Option 10"}, "Option 7", function(value)
+	print(value)
 end)
-tab.AddButton("Create A Notification", "TestButton5", function() -- tab.AddButton(text, name, callback)
-	window.Notification("This Is A Notification!", "Nice", 10) -- window.Notification(title, description, durtion(optional))
+tab1.createSlider("Test Slider", {defualt = 50, max = 100, min = 1}, function(value)
+	print(value)
 end)
-tab.AddLabel("This Is Text", "TestLabel")  -- tab.AddLabel(text, name)
-tab.AddToggle("This Is A Toggle", "TestToggle", false, function(Value) -- tab.AddToggle(text, name, defualt value, callback)
-	print(Value)
-end)
-tab.AddDropdown("This Is A Dropdown", "TestDropdown", {"This Is An Option 1", "This Is An Option 2", "This Is An Option 3"}, function(Value) -- tab.AddDropdown(text, name, values, callback)
-	print(Value)
-end)
-tab.AddSlider("This Is A Slider", "TestSlider", {min = 1, max = 200, defualt = 20}, function(Value) -- tab.AddSlider(text, name, config(min, max, defualt), callback)
-	print(Value)
-end)
-local input = tab.AddInput("This Is A Text Box", "Yes!", "TestInput") -- tab.AddInput(placeholder text, text, name)
-print(input.GetInput())
+local textbox = tab1.createTextBox("Test TextBox", "Test")
 wait(5)
-input.ClearInput()
+print(textbox.getText())
+textbox.clearText()
 ```
 And your done! You can repeat this process to add more tabs
 
@@ -49,36 +40,27 @@ Full Example:
 local lib = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheoTheEpic/AquaLib/main/AquaLib.lua'))()
 
 local window = lib.createWindow("This Is A Window", "TestWindow", true) -- lib.createWindow(title, name, draggable)
-local tab = window.createTab("This Is A Tab") -- window.createTab(name)
-tab.AddButton("This Is A Button", "TestButton", function() -- tab.AddButton(text, name, callback)
-	print("I have been clicked!")
+local tab1 = window.createTab("This Is A Tab") -- window.createTab(name)
+tab1.createButton("Test Button", function()
+	print("Button Pressed!")
 end)
-tab.AddButton("Delete This Button", "TestButton2", function() -- tab.AddButton(text, name, callback)
-	tab.RemoveInstance("TestButton2") -- tab.RemoveInstance(instance name)
+tab1.createButton("Create Notification", function() 
+	window.notification("Test Notification", "Hello World")
 end)
-tab.AddButton("Delete This Tab", "TestButton3", function() -- tab.AddButton(text, name, callback)
-	window.deleteTab("This Is A Tab") -- window.deleteTab(tab name)
+tab1.createToggle("Test Toggle", false, function(value)
+	print(value)
 end)
-tab.AddButton("Delete This Window", "TestButton4", function() -- tab.AddButton(text, name, callback)
-	lib.deleteWindow("TestWindow") -- lib.deleteWindow(window name)
+tab1.createText("Test Text")
+tab1.createDropdown("Test Dropdown", {"Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8", "Option 9", "Option 10"}, "Option 7", function(value)
+	print(value)
 end)
-tab.AddButton("Create A Notification", "TestButton5", function() -- tab.AddButton(text, name, callback)
-	window.Notification("This Is A Notification!", "Nice", 10) -- window.Notification(title, description, durtion(optional))
+tab1.createSlider("Test Slider", {defualt = 50, max = 100, min = 1}, function(value)
+	print(value)
 end)
-tab.AddLabel("This Is Text", "TestLabel")  -- tab.AddLabel(text, name)
-tab.AddToggle("This Is A Toggle", "TestToggle", false, function(Value) -- tab.AddToggle(text, name, defualt value, callback)
-	print(Value)
-end)
-tab.AddDropdown("This Is A Dropdown", "TestDropdown", {"This Is An Option 1", "This Is An Option 2", "This Is An Option 3"}, function(Value) -- tab.AddDropdown(text, name, values, callback)
-	print(Value)
-end)
-tab.AddSlider("This Is A Slider", "TestSlider", {min = 1, max = 200, defualt = 20}, function(Value) -- tab.AddSlider(text, name, config(min, max, defualt), callback)
-	print(Value)
-end)
-local input = tab.AddInput("This Is A Text Box", "Yes!", "TestInput") -- tab.AddInput(placeholder text, text, name)
-print(input.GetInput())
+local textbox = tab1.createTextBox("Test TextBox", "Test")
 wait(5)
-input.ClearInput()
+print(textbox.getText())
+textbox.clearText()
 ```
 
 Function documentation:
@@ -86,11 +68,7 @@ Function documentation:
 Lib:
 lib.createWindow, Usage:
 ```lua
-local window = lib.createWindow("This Is A Window", "TestWindow", true) -- lib.createWindow(title, name, draggable)
-```
-lib.deleteWindow, Usage:
-```lua
-lib.deleteWindow("TestWindow") -- lib.deleteWindow(window name)
+local window = lib.createWindow("Aqua", "Aqua Library", true) -- lib.createWindow(name, title, draggable)
 ```
 
 Window:
@@ -102,55 +80,60 @@ window.deleteTab, Usage:
 ```lua
 window.deleteTab("This Is A Tab") -- window.createTab(name)
 ```
-window.Notification, Usage:
+window.notification, Usage:
 ```lua
-window.Notification("This Is A Notification!", "Nice", 10) -- window.Notification(title, description, durtion(optional))
+window.notification("This Is A Notification!", "Nice") -- window.notification(title, description)
+```
+window.deleteWindow, Usage:
+```lua
+window.deleteWindow("TestWindow") -- lib.deleteWindow(window name)
 ```
 
 Tab:
-tab.AddButton, Usage:
+tab.createButton, Usage:
 ```lua
-tab.AddButton("This Is A Button", "TestButton", function() -- tab.AddButton(text, name, callback)
-	print("I have been clicked!")
+tab.createButton("Test Button", function() -- tab.AddButton(text, callback)
+    print("Button Pressed!")
 end)
 ```
-tab.AddLabel, Usage:
+tab.createText, Usage:
 ```lua
-tab.AddLabel("This Is Text", "TestLabel")  -- tab.AddLabel(text, name)
+tab.createText("Test Text")  -- tab.createText(text)
 ```
-tab.AddToggle, Usage:
+tab.createToggle, Usage:
 ```lua
-tab.AddToggle("This Is A Toggle", "TestToggle", false, function(Value) -- tab.AddToggle(text, name, defualt value, callback)
+tab.createToggle("This Is A Toggle", "TestToggle", false, function(Value) -- tab.createToggle(text, name, defualt value, callback)
 	print(Value) -- Value will be true or false, true means its enabled false means it isnt enabled
 end)
 ```
-tab.AddDropdown, Usage:
+tab.createDropdown, Usage:
 ```lua
-tab.AddDropdown("This Is A Dropdown", "TestDropdown", {"This Is An Option 1", "This Is An Option 2", "This Is An Option 3"}, function(Value) -- tab.AddDropdown(text, name, options, callback)
+tab.createDropdown("This Is A Dropdown", "TestDropdown", {"This Is An Option 1", "This Is An Option 2", "This Is An Option 3"}, function(Value) -- tab.createDropdown(text, name, options, callback)
 	print(Value) -- Will be one of the options
 end)
 ```
-tab.AddSlider, Usage:
+tab.createSlider, Usage:
 ```lua
-tab.AddSlider("This Is A Slider", "TestSlider", {min = 1, max = 200, defualt = 20}, function(Value) -- tab.AddSlider(text, name, config(min, max, defualt), callback)
+tab.createSlider("Test Slider", {min = 1, max = 200, defualt = 20}, function(Value) -- tab.createSlider(text, config(min, max, defualt), callback)
 	print(Value) -- Will be a number between min and max
 end)
 ```
-tab.AddInput, Usage:
+tab.createTextBox, Usage:
 ```lua
-local input = tab.AddInput("This Is A Text Box", "Yes!", "TestInput") -- tab.AddInput(placeholder text, text, name)
+local input = tab.createTextBox("Test TextBox", "Test") -- tab.createTextBox(text, placeholder)
 ```
-tab.RemoveInstance, Usage:
+tab.removeInstance, Usage:
 ```lua
-tab.RemoveInstance("TestButton") -- tab.RemoveInstance(Instance name)
+tab.removeInstance("Test TextBox") -- tab.removeInstance(Instance name)
 ```
-Input:
-input.GetInput, Usage:
+
+Text:
+text.getText, Usage:
 ```lua
-local value = input.GetInput() -- input.GetInput()
+local value = input.getText() -- input.getText()
 print(value)
 ```
-input.ClearInput, Usage:
+text.clearText, Usage:
 ```lua
-input.ClearInput() -- input.ClearInput
+input.clearText() -- input.clearText
 ```
