@@ -1,2 +1,3 @@
-- Massive bug fixes
-- Fixed title
+[1.0.0]
+- Brand new UI
+- Out of BETA
