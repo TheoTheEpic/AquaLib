@@ -1,3 +1,4 @@
-[1.0.0]
-- Brand new UI
-- Out of BETA
+[1.1.0]
+- Added sections
+- Added identifiers to things
+- Fixed bugs
