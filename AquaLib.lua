@@ -101,7 +101,7 @@ lib.createWindow = function(name, title, draggable)
 	local defualt_tab = false
 
 	MainGui.Name = name or "noname"
-	MainGui.Parent = game.Players.LocalPlayer.PlayerGui
+	MainGui.Parent = game.CoreGui
 	MainGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
 	MainGui.ResetOnSpawn = false
 
